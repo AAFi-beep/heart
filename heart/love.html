@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For (nama)</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .heart-container {
+            position: relative;
+            width: 600px;
+            height: 600px;
+        }
+        .text {
+            position: absolute;
+            color: #ff4d6d;
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+            text-shadow: 0 0 10px #ff4d6d;
+            animation: pulse 2s infinite ease-in-out;
+        }
+        .name-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: 'Georgia', serif;
+            font-size: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px #ff4d6d, 0 0 30px #ff4d6d;
+            z-index: 10;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-container" id="heart">
+        <div class="name-center">nama</div>
+    </div>
+    <script>
+        const heartContainer = document.getElementById('heart');
+        const totalWords = 120;
+        const wordText = "I love you";
+        for (let i = 0; i < totalWords; i++) {
+            const span = document.createElement('span');
+            span.className = 'text';
+            span.innerText = wordText;
+            
+            let t = (i / totalWords) * 2 * Math.PI;
+            let x = 16 * Math.pow(Math.sin(t), 3);
+            let y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+
+            const scale = 18;
+            const centerX = 300;
+            const centerY = 300;
+            span.style.left = (centerX + x * scale) + 'px';
+            span.style.top = (centerY + y * scale) + 'px';  
+            span.style.animationDelay = (Math.random() * 2) + 's';
+            heartContainer.appendChild(span);
+        }
+    </script>
+</body>
+</html>
